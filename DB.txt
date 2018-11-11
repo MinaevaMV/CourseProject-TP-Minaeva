@@ -1,0 +1,126 @@
+create database kindergarten;
+use kindergarten;
+create table father
+(
+	father_id int not null
+		primary key,
+	name varchar(255) not null
+)
+;
+
+create table mother
+(
+	mother_id int not null
+		primary key
+)
+;
+
+create table superintendent
+(
+	id_superintendent int not null
+		primary key
+)
+;
+
+create table organization
+(
+	organization_id int not null
+		primary key,
+	superintendent_id int not null,
+	organization_name varchar(255) not null,
+	address varchar(255) not null,
+	constraint organization_superintendent_id_superintendent_fk
+		foreign key (superintendent_id) references superintendent (id_superintendent)
+)
+;
+
+create table `group`
+(
+	group_id int not null
+		primary key,
+	organization_id int not null,
+	constraint group_organization_organization_id_fk
+		foreign key (organization_id) references organization (organization_id)
+)
+;
+
+create table child
+(
+	child_id int not null
+		primary key,
+	Bday date null,
+	father_id int null,
+	group_id int null,
+	mother_id int null,
+	gender tinyint(1) null,
+	child_patronymic varchar(255) null,
+	child_surname varchar(255) null,
+	child_name varchar(255) not null,
+	constraint child_father_father_id_fk
+		foreign key (father_id) references father (father_id),
+	constraint child_group_group_id_fk
+		foreign key (group_id) references `group` (group_id),
+	constraint child_mother_mother_id_fk
+		foreign key (mother_id) references mother (mother_id)
+)
+;
+
+create table child_portfolio
+(
+	child_portfolio_id int not null
+		primary key,
+	child_id int not null,
+	constraint child_portfolio_child_child_id_fk
+		foreign key (child_id) references child (child_id)
+)
+;
+
+create table methodist
+(
+	methodist_id int not null
+		primary key,
+	organization_id int null,
+	cabinet_number int null,
+	constraint methodist_organization_organization_id_fk
+		foreign key (organization_id) references organization (organization_id)
+)
+;
+
+create table psychologist
+(
+	psychologist_id int not null
+		primary key,
+	organization_id int not null,
+	cabinet_number int not null,
+	constraint psychologist_organization_organization_id_fk
+		foreign key (organization_id) references organization (organization_id)
+)
+;
+
+create table report
+(
+	report_id int not null
+		primary key,
+	author_id int null,
+	auditor_id int null,
+	constraint report_methodist_methodist_id_fk
+		foreign key (author_id) references methodist (methodist_id),
+	constraint report_superintendent_id_superintendent_fk
+		foreign key (auditor_id) references superintendent (id_superintendent)
+)
+;
+
+create table teacher
+(
+	teacher_id int not null
+		primary key,
+	educator_id int null,
+	group_id int null,
+	organization_id int not null,
+	constraint teacher_group_group_id_fk
+		foreign key (group_id) references `group` (group_id),
+	constraint teacher_organization_organization_id_fk
+		foreign key (organization_id) references organization (organization_id)
+)
+;
+
