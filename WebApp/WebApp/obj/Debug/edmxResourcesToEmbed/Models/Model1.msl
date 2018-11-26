@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище kindergartenModelContainer" CdmEntityContainer="kindergartenEntities">
+    <EntitySetMapping Name="child">
+      <EntityTypeMapping TypeName="kindergartenModel.child">
+        <MappingFragment StoreEntitySet="child">
+          <ScalarProperty Name="child_id" ColumnName="child_id" />
+          <ScalarProperty Name="Bday" ColumnName="Bday" />
+          <ScalarProperty Name="father_id" ColumnName="father_id" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="mother_id" ColumnName="mother_id" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="child_patronymic" ColumnName="child_patronymic" />
+          <ScalarProperty Name="child_surname" ColumnName="child_surname" />
+          <ScalarProperty Name="child_name" ColumnName="child_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="child_portfolio">
+      <EntityTypeMapping TypeName="kindergartenModel.child_portfolio">
+        <MappingFragment StoreEntitySet="child_portfolio">
+          <ScalarProperty Name="child_portfolio_id" ColumnName="child_portfolio_id" />
+          <ScalarProperty Name="child_id" ColumnName="child_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="father">
+      <EntityTypeMapping TypeName="kindergartenModel.father">
+        <MappingFragment StoreEntitySet="father">
+          <ScalarProperty Name="father_id" ColumnName="father_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="group">
+      <EntityTypeMapping TypeName="kindergartenModel.group">
+        <MappingFragment StoreEntitySet="group">
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="methodist">
+      <EntityTypeMapping TypeName="kindergartenModel.methodist">
+        <MappingFragment StoreEntitySet="methodist">
+          <ScalarProperty Name="methodist_id" ColumnName="methodist_id" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+          <ScalarProperty Name="cabinet_number" ColumnName="cabinet_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mother">
+      <EntityTypeMapping TypeName="kindergartenModel.mother">
+        <MappingFragment StoreEntitySet="mother">
+          <ScalarProperty Name="mother_id" ColumnName="mother_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="organization">
+      <EntityTypeMapping TypeName="kindergartenModel.organization">
+        <MappingFragment StoreEntitySet="organization">
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+          <ScalarProperty Name="superintendent_id" ColumnName="superintendent_id" />
+          <ScalarProperty Name="organization_name" ColumnName="organization_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="psychologist">
+      <EntityTypeMapping TypeName="kindergartenModel.psychologist">
+        <MappingFragment StoreEntitySet="psychologist">
+          <ScalarProperty Name="psychologist_id" ColumnName="psychologist_id" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+          <ScalarProperty Name="cabinet_number" ColumnName="cabinet_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="report">
+      <EntityTypeMapping TypeName="kindergartenModel.report">
+        <MappingFragment StoreEntitySet="report">
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+          <ScalarProperty Name="auditor_id" ColumnName="auditor_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="superintendent">
+      <EntityTypeMapping TypeName="kindergartenModel.superintendent">
+        <MappingFragment StoreEntitySet="superintendent">
+          <ScalarProperty Name="id_superintendent" ColumnName="id_superintendent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teacher">
+      <EntityTypeMapping TypeName="kindergartenModel.teacher">
+        <MappingFragment StoreEntitySet="teacher">
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="educator_id" ColumnName="educator_id" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
