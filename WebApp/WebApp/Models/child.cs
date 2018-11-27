@@ -11,7 +11,8 @@ namespace WebApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class child
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +26,7 @@ namespace WebApp.Models
         public Nullable<int> father_id { get; set; }
         public Nullable<int> group_id { get; set; }
         public Nullable<int> mother_id { get; set; }
-        public Nullable<int> gender { get; set; }
+        public string gender { get; set; }
         public string child_patronymic { get; set; }
         public string child_surname { get; set; }
         public string child_name { get; set; }
@@ -37,46 +38,9 @@ namespace WebApp.Models
         public virtual ICollection<child_portfolio> child_portfolio { get; set; }
 
 
-        public  void CreateChildData(child child)
-        {
-            using (var ctx = new kindergartenEntities())
-            {
-                string query = "insert into child (child_id, BDay, father_id, group_id, mother_id, gender, child_patronymic, child_surname,  child_name ) values (@P0, @P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8)";
-                List<object> paramlist = new List<object>
-            {
-                child.child_id,
-                child.Bday,
-                child.father_id,
-                child.group_id,
-                child.mother_id,
-                child.gender,
-                child.child_patronymic,
-                child.child_surname,
-                child.child_name,
-
-            };
-
-                object[] parameters = paramlist.ToArray();
-                int result = ctx.Database.ExecuteSqlCommand(query, parameters);
-            }
-
-
-        }
-
-        public static List<child> GetChild()
-        {
-            List<child> childs = new List<child>();
-            using (var ctx = new kindergartenEntities())
-            {
-                string query = "select * from child";
-                childs.AddRange(ctx.Database.SqlQuery<child>(query));
-            }
-            return childs;
-        }
+        [NotMapped]
+        public List<mother> momnameslist { get; set; }
+       
+        
     }
-
- 
-
-
-
 }

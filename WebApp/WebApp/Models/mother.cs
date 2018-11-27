@@ -11,18 +11,31 @@ namespace WebApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class mother
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public mother()
         {
             this.child = new HashSet<child>();
+          //  this.fio = mother_name + " " + mother_surname;
         }
     
         public int mother_id { get; set; }
-    
+        public string mother_name { get; set; }
+        public string mother_surname { get; set; }
+        public string mother_patronymic { get; set; }
+        public string fio { get; set; }
+
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> child { get; set; }
+       // [NotMapped]
+       // public string fio;
+       
+        
+      
     }
 }

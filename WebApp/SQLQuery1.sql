@@ -1,0 +1,1 @@
+﻿insert into mother values ('Irina','Ivanova','Olegovna')

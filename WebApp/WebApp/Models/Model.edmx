@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище kindergartenModel2" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="child">
+          <Key>
+            <PropertyRef Name="child_id" />
+          </Key>
+          <Property Name="child_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bday" Type="date" />
+          <Property Name="father_id" Type="int" />
+          <Property Name="group_id" Type="int" />
+          <Property Name="mother_id" Type="int" />
+          <Property Name="gender" Type="varchar" MaxLength="50" />
+          <Property Name="child_patronymic" Type="varchar" MaxLength="255" />
+          <Property Name="child_surname" Type="varchar" MaxLength="255" />
+          <Property Name="child_name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="child_portfolio">
+          <Key>
+            <PropertyRef Name="child_portfolio_id" />
+          </Key>
+          <Property Name="child_portfolio_id" Type="int" Nullable="false" />
+          <Property Name="child_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="father">
+          <Key>
+            <PropertyRef Name="father_id" />
+          </Key>
+          <Property Name="father_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="organization_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="methodist">
+          <Key>
+            <PropertyRef Name="methodist_id" />
+          </Key>
+          <Property Name="methodist_id" Type="int" Nullable="false" />
+          <Property Name="organization_id" Type="int" />
+          <Property Name="cabinet_number" Type="int" />
+        </EntityType>
+        <EntityType Name="mother">
+          <Key>
+            <PropertyRef Name="mother_id" />
+          </Key>
+          <Property Name="mother_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mother_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mother_surname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mother_patronymic" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="organization">
+          <Key>
+            <PropertyRef Name="organization_id" />
+          </Key>
+          <Property Name="organization_id" Type="int" Nullable="false" />
+          <Property Name="superintendent_id" Type="int" Nullable="false" />
+          <Property Name="organization_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="psychologist">
+          <Key>
+            <PropertyRef Name="psychologist_id" />
+          </Key>
+          <Property Name="psychologist_id" Type="int" Nullable="false" />
+          <Property Name="organization_id" Type="int" Nullable="false" />
+          <Property Name="cabinet_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="int" Nullable="false" />
+          <Property Name="author_id" Type="int" />
+          <Property Name="auditor_id" Type="int" />
+        </EntityType>
+        <EntityType Name="superintendent">
+          <Key>
+            <PropertyRef Name="id_superintendent" />
+          </Key>
+          <Property Name="id_superintendent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+          <Property Name="educator_id" Type="int" />
+          <Property Name="group_id" Type="int" />
+          <Property Name="organization_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="child_father_father_id_fk">
+          <End Role="father" Type="Self.father" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="father">
+              <PropertyRef Name="father_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="father_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_group_group_id_fk">
+          <End Role="group" Type="Self.group" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_mother_mother_id_fk">
+          <End Role="mother" Type="Self.mother" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mother">
+              <PropertyRef Name="mother_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="mother_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_portfolio_child_child_id_fk">
+          <End Role="child" Type="Self.child" Multiplicity="1" />
+          <End Role="child_portfolio" Type="Self.child_portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="child">
+              <PropertyRef Name="child_id" />
+            </Principal>
+            <Dependent Role="child_portfolio">
+              <PropertyRef Name="child_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="group" Type="Self.group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="methodist_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="0..1" />
+          <End Role="methodist" Type="Self.methodist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="methodist">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="organization_superintendent_id_superintendent_fk">
+          <End Role="superintendent" Type="Self.superintendent" Multiplicity="1" />
+          <End Role="organization" Type="Self.organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superintendent">
+              <PropertyRef Name="id_superintendent" />
+            </Principal>
+            <Dependent Role="organization">
+              <PropertyRef Name="superintendent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="psychologist_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="psychologist" Type="Self.psychologist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="psychologist">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="report_methodist_methodist_id_fk">
+          <End Role="methodist" Type="Self.methodist" Multiplicity="0..1" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="methodist">
+              <PropertyRef Name="methodist_id" />
+            </Principal>
+            <Dependent Role="report">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="report_superintendent_id_superintendent_fk">
+          <End Role="superintendent" Type="Self.superintendent" Multiplicity="0..1" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superintendent">
+              <PropertyRef Name="id_superintendent" />
+            </Principal>
+            <Dependent Role="report">
+              <PropertyRef Name="auditor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teacher_group_group_id_fk">
+          <End Role="group" Type="Self.group" Multiplicity="0..1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teacher_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище kindergartenModel2Container">
+          <EntitySet Name="child" EntityType="Self.child" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="child_portfolio" EntityType="Self.child_portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="father" EntityType="Self.father" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="methodist" EntityType="Self.methodist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mother" EntityType="Self.mother" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="psychologist" EntityType="Self.psychologist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="superintendent" EntityType="Self.superintendent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="child_father_father_id_fk" Association="Self.child_father_father_id_fk">
+            <End Role="father" EntitySet="father" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_group_group_id_fk" Association="Self.child_group_group_id_fk">
+            <End Role="group" EntitySet="group" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_mother_mother_id_fk" Association="Self.child_mother_mother_id_fk">
+            <End Role="mother" EntitySet="mother" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_portfolio_child_child_id_fk" Association="Self.child_portfolio_child_child_id_fk">
+            <End Role="child" EntitySet="child" />
+            <End Role="child_portfolio" EntitySet="child_portfolio" />
+          </AssociationSet>
+          <AssociationSet Name="group_organization_organization_id_fk" Association="Self.group_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="group" EntitySet="group" />
+          </AssociationSet>
+          <AssociationSet Name="methodist_organization_organization_id_fk" Association="Self.methodist_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="methodist" EntitySet="methodist" />
+          </AssociationSet>
+          <AssociationSet Name="organization_superintendent_id_superintendent_fk" Association="Self.organization_superintendent_id_superintendent_fk">
+            <End Role="superintendent" EntitySet="superintendent" />
+            <End Role="organization" EntitySet="organization" />
+          </AssociationSet>
+          <AssociationSet Name="psychologist_organization_organization_id_fk" Association="Self.psychologist_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="psychologist" EntitySet="psychologist" />
+          </AssociationSet>
+          <AssociationSet Name="report_methodist_methodist_id_fk" Association="Self.report_methodist_methodist_id_fk">
+            <End Role="methodist" EntitySet="methodist" />
+            <End Role="report" EntitySet="report" />
+          </AssociationSet>
+          <AssociationSet Name="report_superintendent_id_superintendent_fk" Association="Self.report_superintendent_id_superintendent_fk">
+            <End Role="superintendent" EntitySet="superintendent" />
+            <End Role="report" EntitySet="report" />
+          </AssociationSet>
+          <AssociationSet Name="teacher_group_group_id_fk" Association="Self.teacher_group_group_id_fk">
+            <End Role="group" EntitySet="group" />
+            <End Role="teacher" EntitySet="teacher" />
+          </AssociationSet>
+          <AssociationSet Name="teacher_organization_organization_id_fk" Association="Self.teacher_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="teacher" EntitySet="teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kindergartenModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="child">
+          <Key>
+            <PropertyRef Name="child_id" />
+          </Key>
+          <Property Name="child_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bday" Type="DateTime" Precision="0" />
+          <Property Name="father_id" Type="Int32" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="mother_id" Type="Int32" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child_patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="child_surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="child_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="father" Relationship="Self.child_father_father_id_fk" FromRole="child" ToRole="father" />
+          <NavigationProperty Name="group" Relationship="Self.child_group_group_id_fk" FromRole="child" ToRole="group" />
+          <NavigationProperty Name="mother" Relationship="Self.child_mother_mother_id_fk" FromRole="child" ToRole="mother" />
+          <NavigationProperty Name="child_portfolio" Relationship="Self.child_portfolio_child_child_id_fk" FromRole="child" ToRole="child_portfolio" />
+        </EntityType>
+        <EntityType Name="child_portfolio">
+          <Key>
+            <PropertyRef Name="child_portfolio_id" />
+          </Key>
+          <Property Name="child_portfolio_id" Type="Int32" Nullable="false" />
+          <Property Name="child_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="child" Relationship="Self.child_portfolio_child_child_id_fk" FromRole="child_portfolio" ToRole="child" />
+        </EntityType>
+        <EntityType Name="father">
+          <Key>
+            <PropertyRef Name="father_id" />
+          </Key>
+          <Property Name="father_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="child" Relationship="Self.child_father_father_id_fk" FromRole="father" ToRole="child" />
+        </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="child" Relationship="Self.child_group_group_id_fk" FromRole="group" ToRole="child" />
+          <NavigationProperty Name="organization" Relationship="Self.group_organization_organization_id_fk" FromRole="group" ToRole="organization" />
+          <NavigationProperty Name="teacher" Relationship="Self.teacher_group_group_id_fk" FromRole="group" ToRole="teacher" />
+        </EntityType>
+        <EntityType Name="methodist">
+          <Key>
+            <PropertyRef Name="methodist_id" />
+          </Key>
+          <Property Name="methodist_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_id" Type="Int32" />
+          <Property Name="cabinet_number" Type="Int32" />
+          <NavigationProperty Name="organization" Relationship="Self.methodist_organization_organization_id_fk" FromRole="methodist" ToRole="organization" />
+          <NavigationProperty Name="report" Relationship="Self.report_methodist_methodist_id_fk" FromRole="methodist" ToRole="report" />
+        </EntityType>
+        <EntityType Name="mother">
+          <Key>
+            <PropertyRef Name="mother_id" />
+          </Key>
+          <Property Name="mother_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mother_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mother_surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mother_patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="child" Relationship="Self.child_mother_mother_id_fk" FromRole="mother" ToRole="child" />
+        </EntityType>
+        <EntityType Name="organization">
+          <Key>
+            <PropertyRef Name="organization_id" />
+          </Key>
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <Property Name="superintendent_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="group" Relationship="Self.group_organization_organization_id_fk" FromRole="organization" ToRole="group" />
+          <NavigationProperty Name="methodist" Relationship="Self.methodist_organization_organization_id_fk" FromRole="organization" ToRole="methodist" />
+          <NavigationProperty Name="superintendent" Relationship="Self.organization_superintendent_id_superintendent_fk" FromRole="organization" ToRole="superintendent" />
+          <NavigationProperty Name="psychologist" Relationship="Self.psychologist_organization_organization_id_fk" FromRole="organization" ToRole="psychologist" />
+          <NavigationProperty Name="teacher" Relationship="Self.teacher_organization_organization_id_fk" FromRole="organization" ToRole="teacher" />
+        </EntityType>
+        <EntityType Name="psychologist">
+          <Key>
+            <PropertyRef Name="psychologist_id" />
+          </Key>
+          <Property Name="psychologist_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <Property Name="cabinet_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="organization" Relationship="Self.psychologist_organization_organization_id_fk" FromRole="psychologist" ToRole="organization" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="Int32" Nullable="false" />
+          <Property Name="author_id" Type="Int32" />
+          <Property Name="auditor_id" Type="Int32" />
+          <NavigationProperty Name="methodist" Relationship="Self.report_methodist_methodist_id_fk" FromRole="report" ToRole="methodist" />
+          <NavigationProperty Name="superintendent" Relationship="Self.report_superintendent_id_superintendent_fk" FromRole="report" ToRole="superintendent" />
+        </EntityType>
+        <EntityType Name="superintendent">
+          <Key>
+            <PropertyRef Name="id_superintendent" />
+          </Key>
+          <Property Name="id_superintendent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="organization" Relationship="Self.organization_superintendent_id_superintendent_fk" FromRole="superintendent" ToRole="organization" />
+          <NavigationProperty Name="report" Relationship="Self.report_superintendent_id_superintendent_fk" FromRole="superintendent" ToRole="report" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="educator_id" Type="Int32" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="group" Relationship="Self.teacher_group_group_id_fk" FromRole="teacher" ToRole="group" />
+          <NavigationProperty Name="organization" Relationship="Self.teacher_organization_organization_id_fk" FromRole="teacher" ToRole="organization" />
+        </EntityType>
+        <Association Name="child_father_father_id_fk">
+          <End Role="father" Type="Self.father" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="father">
+              <PropertyRef Name="father_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="father_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_group_group_id_fk">
+          <End Role="group" Type="Self.group" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_mother_mother_id_fk">
+          <End Role="mother" Type="Self.mother" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mother">
+              <PropertyRef Name="mother_id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="mother_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="child_portfolio_child_child_id_fk">
+          <End Role="child" Type="Self.child" Multiplicity="1" />
+          <End Role="child_portfolio" Type="Self.child_portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="child">
+              <PropertyRef Name="child_id" />
+            </Principal>
+            <Dependent Role="child_portfolio">
+              <PropertyRef Name="child_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="group" Type="Self.group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teacher_group_group_id_fk">
+          <End Role="group" Type="Self.group" Multiplicity="0..1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="methodist_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="0..1" />
+          <End Role="methodist" Type="Self.methodist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="methodist">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="report_methodist_methodist_id_fk">
+          <End Role="methodist" Type="Self.methodist" Multiplicity="0..1" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="methodist">
+              <PropertyRef Name="methodist_id" />
+            </Principal>
+            <Dependent Role="report">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="organization_superintendent_id_superintendent_fk">
+          <End Role="superintendent" Type="Self.superintendent" Multiplicity="1" />
+          <End Role="organization" Type="Self.organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superintendent">
+              <PropertyRef Name="id_superintendent" />
+            </Principal>
+            <Dependent Role="organization">
+              <PropertyRef Name="superintendent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="psychologist_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="psychologist" Type="Self.psychologist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="psychologist">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teacher_organization_organization_id_fk">
+          <End Role="organization" Type="Self.organization" Multiplicity="1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="organization_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="report_superintendent_id_superintendent_fk">
+          <End Role="superintendent" Type="Self.superintendent" Multiplicity="0..1" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superintendent">
+              <PropertyRef Name="id_superintendent" />
+            </Principal>
+            <Dependent Role="report">
+              <PropertyRef Name="auditor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kindergartenEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="child" EntityType="Self.child" />
+          <EntitySet Name="child_portfolio" EntityType="Self.child_portfolio" />
+          <EntitySet Name="father" EntityType="Self.father" />
+          <EntitySet Name="group" EntityType="Self.group" />
+          <EntitySet Name="methodist" EntityType="Self.methodist" />
+          <EntitySet Name="mother" EntityType="Self.mother" />
+          <EntitySet Name="organization" EntityType="Self.organization" />
+          <EntitySet Name="psychologist" EntityType="Self.psychologist" />
+          <EntitySet Name="report" EntityType="Self.report" />
+          <EntitySet Name="superintendent" EntityType="Self.superintendent" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" />
+          <AssociationSet Name="child_father_father_id_fk" Association="Self.child_father_father_id_fk">
+            <End Role="father" EntitySet="father" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_group_group_id_fk" Association="Self.child_group_group_id_fk">
+            <End Role="group" EntitySet="group" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_mother_mother_id_fk" Association="Self.child_mother_mother_id_fk">
+            <End Role="mother" EntitySet="mother" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="child_portfolio_child_child_id_fk" Association="Self.child_portfolio_child_child_id_fk">
+            <End Role="child" EntitySet="child" />
+            <End Role="child_portfolio" EntitySet="child_portfolio" />
+          </AssociationSet>
+          <AssociationSet Name="group_organization_organization_id_fk" Association="Self.group_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="group" EntitySet="group" />
+          </AssociationSet>
+          <AssociationSet Name="teacher_group_group_id_fk" Association="Self.teacher_group_group_id_fk">
+            <End Role="group" EntitySet="group" />
+            <End Role="teacher" EntitySet="teacher" />
+          </AssociationSet>
+          <AssociationSet Name="methodist_organization_organization_id_fk" Association="Self.methodist_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="methodist" EntitySet="methodist" />
+          </AssociationSet>
+          <AssociationSet Name="report_methodist_methodist_id_fk" Association="Self.report_methodist_methodist_id_fk">
+            <End Role="methodist" EntitySet="methodist" />
+            <End Role="report" EntitySet="report" />
+          </AssociationSet>
+          <AssociationSet Name="organization_superintendent_id_superintendent_fk" Association="Self.organization_superintendent_id_superintendent_fk">
+            <End Role="superintendent" EntitySet="superintendent" />
+            <End Role="organization" EntitySet="organization" />
+          </AssociationSet>
+          <AssociationSet Name="psychologist_organization_organization_id_fk" Association="Self.psychologist_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="psychologist" EntitySet="psychologist" />
+          </AssociationSet>
+          <AssociationSet Name="teacher_organization_organization_id_fk" Association="Self.teacher_organization_organization_id_fk">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="teacher" EntitySet="teacher" />
+          </AssociationSet>
+          <AssociationSet Name="report_superintendent_id_superintendent_fk" Association="Self.report_superintendent_id_superintendent_fk">
+            <End Role="superintendent" EntitySet="superintendent" />
+            <End Role="report" EntitySet="report" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище kindergartenModel2Container" CdmEntityContainer="kindergartenEntities2">
+          <EntitySetMapping Name="child">
+            <EntityTypeMapping TypeName="kindergartenModel2.child">
+              <MappingFragment StoreEntitySet="child">
+                <ScalarProperty Name="child_id" ColumnName="child_id" />
+                <ScalarProperty Name="Bday" ColumnName="Bday" />
+                <ScalarProperty Name="father_id" ColumnName="father_id" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="mother_id" ColumnName="mother_id" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="child_patronymic" ColumnName="child_patronymic" />
+                <ScalarProperty Name="child_surname" ColumnName="child_surname" />
+                <ScalarProperty Name="child_name" ColumnName="child_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="child_portfolio">
+            <EntityTypeMapping TypeName="kindergartenModel2.child_portfolio">
+              <MappingFragment StoreEntitySet="child_portfolio">
+                <ScalarProperty Name="child_portfolio_id" ColumnName="child_portfolio_id" />
+                <ScalarProperty Name="child_id" ColumnName="child_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="father">
+            <EntityTypeMapping TypeName="kindergartenModel2.father">
+              <MappingFragment StoreEntitySet="father">
+                <ScalarProperty Name="father_id" ColumnName="father_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="group">
+            <EntityTypeMapping TypeName="kindergartenModel2.group">
+              <MappingFragment StoreEntitySet="group">
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="methodist">
+            <EntityTypeMapping TypeName="kindergartenModel2.methodist">
+              <MappingFragment StoreEntitySet="methodist">
+                <ScalarProperty Name="methodist_id" ColumnName="methodist_id" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+                <ScalarProperty Name="cabinet_number" ColumnName="cabinet_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mother">
+            <EntityTypeMapping TypeName="kindergartenModel2.mother">
+              <MappingFragment StoreEntitySet="mother">
+                <ScalarProperty Name="mother_id" ColumnName="mother_id" />
+                <ScalarProperty Name="mother_name" ColumnName="mother_name" />
+                <ScalarProperty Name="mother_surname" ColumnName="mother_surname" />
+                <ScalarProperty Name="mother_patronymic" ColumnName="mother_patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="organization">
+            <EntityTypeMapping TypeName="kindergartenModel2.organization">
+              <MappingFragment StoreEntitySet="organization">
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+                <ScalarProperty Name="superintendent_id" ColumnName="superintendent_id" />
+                <ScalarProperty Name="organization_name" ColumnName="organization_name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="psychologist">
+            <EntityTypeMapping TypeName="kindergartenModel2.psychologist">
+              <MappingFragment StoreEntitySet="psychologist">
+                <ScalarProperty Name="psychologist_id" ColumnName="psychologist_id" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+                <ScalarProperty Name="cabinet_number" ColumnName="cabinet_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="report">
+            <EntityTypeMapping TypeName="kindergartenModel2.report">
+              <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="author_id" ColumnName="author_id" />
+                <ScalarProperty Name="auditor_id" ColumnName="auditor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="superintendent">
+            <EntityTypeMapping TypeName="kindergartenModel2.superintendent">
+              <MappingFragment StoreEntitySet="superintendent">
+                <ScalarProperty Name="id_superintendent" ColumnName="id_superintendent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher">
+            <EntityTypeMapping TypeName="kindergartenModel2.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="educator_id" ColumnName="educator_id" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
