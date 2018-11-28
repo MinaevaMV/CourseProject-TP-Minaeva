@@ -51,6 +51,9 @@
     <Property Name="mother_name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="mother_surname" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="mother_patronymic" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="mother_passport_data" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="mother_Bday" Type="date" />
+    <Property Name="mother_phone" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="organization">
     <Key>

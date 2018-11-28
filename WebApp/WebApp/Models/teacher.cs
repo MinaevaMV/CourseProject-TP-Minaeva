@@ -15,9 +15,15 @@ namespace WebApp.Models
     public partial class teacher
     {
         public int teacher_id { get; set; }
-        public Nullable<int> educator_id { get; set; }
-        public Nullable<int> group_id { get; set; }
         public int organization_id { get; set; }
+        public string teacher_surname { get; set; }
+        public string teacher_name { get; set; }
+        public string teacher_patronymic { get; set; }
+        public string teacher_education { get; set; }
+        public string teacher_category { get; set; }
+        public int teacher_experience { get; set; }
+        public int teacher_group_id { get; set; }
+        public string teacher_phone { get; set; }
     
         public virtual group group { get; set; }
         public virtual organization organization { get; set; }

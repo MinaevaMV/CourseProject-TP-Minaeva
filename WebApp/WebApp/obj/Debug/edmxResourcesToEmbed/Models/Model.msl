@@ -52,6 +52,9 @@
     <EntitySetMapping Name="mother">
       <EntityTypeMapping TypeName="kindergartenModel2.mother">
         <MappingFragment StoreEntitySet="mother">
+          <ScalarProperty Name="mother_phone" ColumnName="mother_phone" />
+          <ScalarProperty Name="mother_Bday" ColumnName="mother_Bday" />
+          <ScalarProperty Name="mother_passport_data" ColumnName="mother_passport_data" />
           <ScalarProperty Name="mother_id" ColumnName="mother_id" />
           <ScalarProperty Name="mother_name" ColumnName="mother_name" />
           <ScalarProperty Name="mother_surname" ColumnName="mother_surname" />

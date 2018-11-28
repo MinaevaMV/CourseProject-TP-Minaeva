@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="53c3078144e74ffea33d127a728009ea" Name="Diagram1">
+        <EntityTypeShape EntityType="kindergartenModel3.child" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.child_portfolio" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.father" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.group" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.methodist" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.mother" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.organization" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.psychologist" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.report" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.schedule" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.superintendent" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel3.teacher" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="kindergartenModel3.child_father_father_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.child_group_group_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.child_mother_mother_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.child_portfolio_child_child_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.group_organization_organization_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.schedule_group_group_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.teacher_group_group_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.methodist_organization_organization_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.report_methodist_methodist_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.organization_superintendent_id_superintendent_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.psychologist_organization_organization_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.teacher_organization_organization_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel3.report_superintendent_id_superintendent_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

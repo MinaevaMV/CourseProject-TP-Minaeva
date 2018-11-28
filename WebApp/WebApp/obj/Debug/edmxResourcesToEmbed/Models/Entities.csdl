@@ -60,6 +60,12 @@
     </Key>
     <Property Name="mother_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="child" Relationship="Self.child_mother_mother_id_fk" FromRole="mother" ToRole="child" />
+    <Property Name="mother_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="mother_surname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="mother_patronymic" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="mother_passport_data" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="mother_Bday" Type="DateTime" Precision="0" />
+    <Property Name="mother_phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="organization">
     <Key>

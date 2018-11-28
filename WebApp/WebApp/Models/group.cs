@@ -18,15 +18,23 @@ namespace WebApp.Models
         public group()
         {
             this.child = new HashSet<child>();
+            this.schedule = new HashSet<schedule>();
             this.teacher = new HashSet<teacher>();
         }
     
         public int group_id { get; set; }
         public int organization_id { get; set; }
+        public int group_cabinet { get; set; }
+        public string group_profile { get; set; }
+        public int group_area { get; set; }
+        public string group_children_age { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> child { get; set; }
         public virtual organization organization { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<schedule> schedule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<teacher> teacher { get; set; }
     }

@@ -22,6 +22,11 @@ namespace WebApp.Models
         }
     
         public int id_superintendent { get; set; }
+        public string superintendent_surname { get; set; }
+        public string superintendent_name { get; set; }
+        public string superintendent_patronymic { get; set; }
+        public string superintendent_job { get; set; }
+        public string superintendent_phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<organization> organization { get; set; }

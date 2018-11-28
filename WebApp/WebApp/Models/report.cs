@@ -15,8 +15,11 @@ namespace WebApp.Models
     public partial class report
     {
         public int report_id { get; set; }
-        public Nullable<int> author_id { get; set; }
-        public Nullable<int> auditor_id { get; set; }
+        public int author_id { get; set; }
+        public int auditor_id { get; set; }
+        public string text { get; set; }
+        public string saved { get; set; }
+        public string sended { get; set; }
     
         public virtual methodist methodist { get; set; }
         public virtual superintendent superintendent { get; set; }

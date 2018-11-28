@@ -30,15 +30,29 @@ namespace WebApp.Controllers
             child child_model = new child();
 
             mother mothermodel = new mother();
-            //  mothermodel.fio = mothermodel.mother_name + " " + mothermodel.mother_surname + " " + mothermodel.mother_patronymic;
+            father fathermodel = new father();
+            group groupmodel = new group();
 
-            using (kindergartenEntities2 db = new kindergartenEntities2())
+            using (kindergartenEntities3 db = new kindergartenEntities3())
             {
                 child_model.momnameslist = db.mother.ToList<mother>();
+                child_model.dadnameslist = db.father.ToList<father>();
+                child_model.groupslist = db.group.ToList<group>();
+
                 foreach (mother el in child_model.momnameslist)
                 {
-                    el.fio = el.mother_name + " " + el.mother_surname + " " + el.mother_patronymic;
+                    el.fio = el.mother_surname + " " + el.mother_name + " " + el.mother_patronymic;
                 }
+                foreach (father el in child_model.dadnameslist)
+                {
+                    el.fio = el.father_surname + " " + el.father_name + " " + el.father_patronymic;
+                }
+                foreach (group el in child_model.groupslist)
+                {
+                    el.name = el.group_children_age + " " + el.group_profile;
+                }
+
+
             }
 
             return View(child_model);
@@ -87,10 +101,37 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        // // // // // // // //
+
+        [HttpGet]
+        public ActionResult CreateFather()
+        {
 
 
+            return View();
 
+        }
+        [HttpPost]
+        public ActionResult CreateFather(father father)
+        {
+            FatherDAO _daom = new FatherDAO();
+            try
+            {
+                // child1.gender = (int)ViewData["Gender"];
+                _daom.CreateFatherData(father);
+                return RedirectToAction("Create");
 
+            }
+            catch (Exception ex)
+            {
+            }
+            return RedirectToAction("Create");
+        }
+
+        public ActionResult IndexFather()
+        {
+            return View(FatherDAO.GetFather());
+        }
         /// 
 
         [HttpGet]
@@ -99,7 +140,10 @@ namespace WebApp.Controllers
 
             
             return View();
-                }
+
+        }
+
+
 
         [HttpPost]
         public ActionResult CreateMothertest(mother mother)

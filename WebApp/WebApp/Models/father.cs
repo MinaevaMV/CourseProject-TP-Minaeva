@@ -21,7 +21,17 @@ namespace WebApp.Models
         }
     
         public int father_id { get; set; }
-        public string name { get; set; }
+        public string father_surname { get; set; }
+        public string father_name { get; set; }
+        public string father_patronymic { get; set; }
+        public string father_passport_data { get; set; }
+        public System.DateTime father_Bday { get; set; }
+        public string father_phone { get; set; }
+        public string father_education { get; set; }
+        public string father_job { get; set; }
+        public string father_login { get; set; }
+        public string father_password { get; set; }
+        public string fio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> child { get; set; }

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebApp.Models.father>
+
+@{
+    ViewBag.Title = "IndexFather";
+}
+
+<h2>IndexFather</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.father_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_patronymic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_passport_data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_Bday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_education)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.father_job)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_patronymic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_passport_data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_Bday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_education)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.father_job)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -16,7 +16,14 @@ namespace WebApp.Models
     {
         public int psychologist_id { get; set; }
         public int organization_id { get; set; }
-        public int cabinet_number { get; set; }
+        public string psychologist_surname { get; set; }
+        public string psychologist_name { get; set; }
+        public string psychologist_patronymic { get; set; }
+        public string psychologist_education { get; set; }
+        public string psychologist_category { get; set; }
+        public int psychologist_experience { get; set; }
+        public int psychologist_cabinet { get; set; }
+        public string psychologist_phone { get; set; }
     
         public virtual organization organization { get; set; }
     }

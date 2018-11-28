@@ -21,8 +21,15 @@ namespace WebApp.Models
         }
     
         public int methodist_id { get; set; }
-        public Nullable<int> organization_id { get; set; }
-        public Nullable<int> cabinet_number { get; set; }
+        public int organization_id { get; set; }
+        public string methodist_surname { get; set; }
+        public string methodist_name { get; set; }
+        public string methodist_patronymic { get; set; }
+        public string methodist_education { get; set; }
+        public string methodist_category { get; set; }
+        public int methodist_experience { get; set; }
+        public int methodist_cabinet { get; set; }
+        public string methodist_phone { get; set; }
     
         public virtual organization organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

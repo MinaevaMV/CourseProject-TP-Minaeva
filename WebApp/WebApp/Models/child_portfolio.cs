@@ -16,6 +16,9 @@ namespace WebApp.Models
     {
         public int child_portfolio_id { get; set; }
         public int child_id { get; set; }
+        public string child_private_health_data { get; set; }
+        public string child_private_mental_health_data { get; set; }
+        public string child_achivements { get; set; }
     
         public virtual child child { get; set; }
     }
