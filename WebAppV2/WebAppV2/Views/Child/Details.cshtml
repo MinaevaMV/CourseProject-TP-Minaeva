@@ -1,0 +1,196 @@
+﻿@model WebAppV2.Models.child
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>child</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div>
+
+        @{ var mother = (ViewData["mother"] as List
+<WebAppV2.Models.mother>).ElementAt(0);
+
+        <div style="float: left; text-align:left">
+
+            <dt>
+                <p style=" text-align: left">Фамилия:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_surname)
+            </dd>
+
+
+            <dt>
+                <p style=" text-align: left">Имя:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_name)
+            </dd>
+
+
+            <dt>
+                <p style=" text-align: left">Отчество:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_patronymic)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Дата рождения:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_Bday)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Серия и номер пасспорта:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_passport_data)
+            </dd>
+
+            <dt>
+                <p style=" text-align: left">Контактный телефон:</p>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => mother.mother_phone)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Образование:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => mother.mother_education)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Место работы и должность:</p>
+            </dt>
+            <dd>
+                <p></p>
+                @Html.DisplayFor(model => mother.mother_job)
+            </dd>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        }
+        <div style="float: left; text-align:left; width: 50px">
+            <p></p>
+        </div>
+        @{ var father = (ViewData["father"] as List
+<WebAppV2.Models.father>).ElementAt(0);
+
+        <div style="float: left; text-align:left">
+            <dt>
+                <p style=" text-align: left">Фамилия:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_surname)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Имя:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_name)
+            </dd>
+
+
+            <dt>
+                <p style=" text-align: left">Отчество:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_patronymic)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Дата рождения:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_Bday)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Серия и номер пасспорта:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_passport_data)
+            </dd>
+
+            <dt>
+                <p style=" text-align: left">Контактный телефон:</p>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => father.father_phone)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Образование:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => father.father_education)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Место работы и должность:</p>
+            </dt>
+            <dd>
+                <p></p>
+                @Html.DisplayFor(model => father.father_job)
+            </dd>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        }
+        <div style="float: left; text-align:left; width: 50px">
+            <p></p>
+        </div>
+        @{ var group = (ViewData["group"] as List
+<WebAppV2.Models.group>).ElementAt(0);
+
+        <div style="float: left; text-align:left">
+            <dt>
+                <p style=" text-align: left">ID группы:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => group.group_id)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Возраст детей:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => group.group_children_age)
+            </dd>
+
+
+            <dt>
+                <p style=" text-align: left">Кабинет:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => group.group_cabinet)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Профиль:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => group.group_profile)
+            </dd>
+            <dt>
+                <p style=" text-align: left">Площадь:</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => group.group_area)
+            </dd>
+        </div>
+        }
+    </dl>
+
+</div>
+
+@*<div style="float:left">
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+@*</div>*@

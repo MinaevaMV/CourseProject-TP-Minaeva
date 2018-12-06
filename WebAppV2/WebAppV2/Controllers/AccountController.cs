@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using WebApp.Models;
 using WebAppV2.Models;
 
 namespace WebAppV2.Controllers
@@ -180,11 +181,25 @@ namespace WebAppV2.Controllers
         [HttpPost]
         public ActionResult RegisterStep2(mother user)
         {
-            if ((string)ViewData["gender"]=="male")
+            if ((string)Session["gender"]=="male")
             {
-                return null;
+              //  FatherDAO fdao = new FatherDAO();
+                father father = new father();
+                father.father_id = user.mother_id;
+                father.father_passport_data = user.mother_passport_data;
+                if (FatherDAO.UpdateLogin(father))
+                {
+                    Session["user"] = user;
+
+                }
+                else
+                {
+                    ViewData["error"] = "write correct passport data or tikaite s sela";
+                    return View();
+                }
+                return  RedirectToAction("Index", "Home"); ;
             }
-            else return RedirectToAction("Index", "Home");
+            else return null;
 
 
         }

@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    //  @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <hr />
@@ -60,10 +60,16 @@
     <script>
         function GetGender() {
             if (document.getElementById("male").checked) {
-               @{ViewData["gender"] = "male";
+
+                Session["gender"] = "male";
+               @{Session["gender"] = "male";
                }
+                
             }
-            else  @{ViewData["gender"] = "female";
+            @*else if (document.getElementById("female").checked) {
+                @{Session["gender"] = "female";
+            }
+            }*@
         }
     </script>
 
@@ -75,7 +81,10 @@
         </div>
     </div>
 
-
+    @if (ViewData["error"]!= null)
+    {
+        <p style="color:red">@ViewData["error"]</p>
+    }
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" onclick="GetGender()" class="btn btn-default" />

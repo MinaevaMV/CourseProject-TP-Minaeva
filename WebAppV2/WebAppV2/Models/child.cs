@@ -30,7 +30,9 @@ namespace WebAppV2.Models
         public Nullable<int> mother_id { get; set; }
         public Nullable<int> father_id { get; set; }
         public Nullable<int> group_id { get; set; }
-    
+        public string mother_fio { get; set; }
+        public string father_fio { get; set; }
+
         public virtual father father { get; set; }
         public virtual group group { get; set; }
         public virtual mother mother { get; set; }

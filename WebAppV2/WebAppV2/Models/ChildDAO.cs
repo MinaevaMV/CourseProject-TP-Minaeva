@@ -18,6 +18,14 @@ namespace WebApp.Models
             }
             return childs;
         }
+
+        public static child getById(int id)
+        {
+            using (kindergartenEntities ctx = new kindergartenEntities())
+            {
+                return (from a in ctx.child where a.child_id == id select a).FirstOrDefault();
+            }
+        }
         public void CreateChildData(child child)
         {
             using (var ctx = new kindergartenEntities())

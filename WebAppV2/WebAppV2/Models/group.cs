@@ -28,7 +28,8 @@ namespace WebAppV2.Models
         public string group_profile { get; set; }
         public int group_area { get; set; }
         public string group_children_age { get; set; }
-    
+        public string name { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> child { get; set; }
         public virtual organization organization { get; set; }

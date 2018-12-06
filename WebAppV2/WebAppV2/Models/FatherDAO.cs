@@ -24,7 +24,7 @@ namespace WebApp.Models
             {
                 string query = "insert into father (father_surname, father_name, father_patronymic, father_passport_data, father_Bday, father_phone, father_education, father_job ) values (@P0, @P1, @P2, @P3, @P4, @P5, @P6, @P7)";
                 List<object> paramlist = new List<object>
-            {
+                {
 
                 father.father_surname,
                 father.father_name,
@@ -35,10 +35,33 @@ namespace WebApp.Models
                 father.father_education,
                 father.father_job,
 
-            };
+                };
 
                 object[] parameters = paramlist.ToArray();
                 int result = ctx.Database.ExecuteSqlCommand(query, parameters);
+            }
+        }
+
+        public static bool UpdateLogin(father father)
+        {
+            using (var ctx = new kindergartenEntities())
+            {
+                string query = "update father set father_login = @p1 where father_passport_data = @p2";
+                List<object> paramlist = new List<object>
+                {
+
+                father.father_login,
+                father.father_passport_data,
+
+                };
+
+                object[] parameters = paramlist.ToArray();
+                int result = ctx.Database.ExecuteSqlCommand(query, parameters);
+                if (result == 0)
+                {
+                    return false;
+                }
+                return true;
             }
         }
     }

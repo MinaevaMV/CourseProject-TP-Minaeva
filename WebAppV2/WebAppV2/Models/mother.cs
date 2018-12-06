@@ -31,7 +31,8 @@ namespace WebAppV2.Models
         public string mother_job { get; set; }
         public string mother_login { get; set; }
         public string mother_password { get; set; }
-    
+        public string fio { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> child { get; set; }
     }
