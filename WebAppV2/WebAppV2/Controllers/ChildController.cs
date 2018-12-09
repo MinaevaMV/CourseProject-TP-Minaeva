@@ -22,7 +22,7 @@ namespace WebApp.Controllers
                 mother mother_model = new mother();
                 string query = "select m.* from mother m inner join child c on c.mother_id=m.mother_id";
                 List<mother> mlist = ctx.Database.SqlQuery<mother>(query).ToList();
-                foreach(mother el in mlist)
+                foreach (mother el in mlist)
                 {
                     el.fio = el.mother_name + " " + el.mother_surname + " " + el.mother_patronymic;
                 }
@@ -36,7 +36,7 @@ namespace WebApp.Controllers
                 ViewData["fatherFIO"] = flist;
                 List<child> list_child = ChildDAO.GetChild();
 
-            return View(list_child);
+                return View(list_child);
             }
         }
 
@@ -47,21 +47,22 @@ namespace WebApp.Controllers
 
             using (kindergartenEntities ctx = new kindergartenEntities())
             {
-                string momquery = string.Format("select m.* from mother m inner join child c on c.mother_id=m.mother_id where c.child_id={0}",id);
-                
+                string momquery = string.Format("select m.* from mother m inner join child c on c.mother_id=m.mother_id where c.child_id={0}", id);
+
                 string dadquery = string.Format("select f.* from father f inner join child c on c.father_id=f.father_id where c.child_id={0}", id);
-                string groupquery = string.Format("select g.* from [group] g inner join child c on c.group_id = g.group_id where c.child_id={0}",id);
+                string groupquery = string.Format("select g.* from [group] g inner join child c on c.group_id = g.group_id where c.child_id={0}", id);
                 List<mother> mlist = ctx.Database.SqlQuery<mother>(momquery).ToList();
                 mother mother = mlist.ElementAt(0);
                 List<father> flist = ctx.Database.SqlQuery<father>(dadquery).ToList();
                 father father = flist.ElementAt(0);
                 List<group> glist = ctx.Database.SqlQuery<group>(groupquery).ToList();
                 group group = glist.ElementAt(0);
-                //List<mother> flist = ctx.Database.SqlQuery<mother>(dadquery).ToList();
-                //List<mother> glist = ctx.Database.SqlQuery<mother>(groupquery).ToList();
+                Family fam = new Family(id, mlist.ElementAt(0).mother_id, flist.ElementAt(0).father_id);
                 ViewData["mother"] = mlist;
                 ViewData["father"] = flist;
                 ViewData["group"] = glist;
+                ViewData["family"] = fam;
+               
             }
 
             return View(ChildDAO.getById(id));
@@ -95,25 +96,22 @@ namespace WebApp.Controllers
                     el.name = el.group_children_age + " " + el.group_profile;
                 }
 
-
-
             }
 
             return View(child_model);
-
         }
-
-
-
 
         [HttpPost]
         public ActionResult Create(child child1)
         {
-
+            ChildportfolioDAO portfolioDAO = new ChildportfolioDAO();
             try
             {
                 // child1.gender = (int)ViewData["Gender"];
+
                 _dao.CreateChildData(child1);
+
+
                 return RedirectToAction("Index");
 
             }
@@ -128,10 +126,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public ActionResult CreateFather()
         {
-
-
             return View();
-
         }
         [HttpPost]
         public ActionResult CreateFather(father father)
@@ -159,14 +154,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public ActionResult CreateMothertest()
         {
-
-
             return View();
-
         }
-
-
-
         [HttpPost]
         public ActionResult CreateMothertest(mother mother)
         {
@@ -189,30 +178,7 @@ namespace WebApp.Controllers
             return View(MotherDAO.GetMother());
         }
 
-        ///
-
-
-        // GET: Child/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Child/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+   
 
         // GET: Child/Delete/5
         public ActionResult Delete(int id)

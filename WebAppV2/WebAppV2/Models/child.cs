@@ -11,6 +11,7 @@ namespace WebAppV2.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class child
@@ -25,6 +26,7 @@ namespace WebAppV2.Models
         public string child_surname { get; set; }
         public string child_name { get; set; }
         public string child_patronymic { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> Bday { get; set; }
         public string gender { get; set; }
         public Nullable<int> mother_id { get; set; }

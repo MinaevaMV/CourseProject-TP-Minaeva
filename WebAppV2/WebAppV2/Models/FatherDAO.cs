@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebAppV2.Models;
 
-namespace WebApp.Models
+namespace WebAppV2.Models
 {
     public class FatherDAO
     {
@@ -64,5 +64,32 @@ namespace WebApp.Models
                 return true;
             }
         }
+
+        public static void updatefather(father father)
+        {
+
+            using (var ctx = new kindergartenEntities())
+            {
+                father fa = ctx.father.Where(f => f.father_id == father.father_id).FirstOrDefault();
+
+                string upquery = "update father set father_surname = @P0, father_name= @P1, father_patronymic= @P2, father_passport_data= @P3, father_Bday= @P4, father_phone= @P5, father_education= @P6, father_job= @P7";
+                List<object> paramlist = new List<object>
+                {
+
+                fa.father_surname,
+                fa.father_name,
+                fa.father_patronymic,
+                fa.father_passport_data,
+                fa.father_Bday,
+                fa.father_phone,
+                fa.father_education,
+                fa.father_job,
+
+                };
+                object[] parameters = paramlist.ToArray();
+                int result = ctx.Database.ExecuteSqlCommand(upquery, parameters);
+            }
+        }
+
     }
 }

@@ -92,7 +92,7 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", "ChildPortfolio",new { id=item.child_id }, new { htmlAttributes = new { @class = "" } }) |
             @Html.ActionLink("Details", "Details", new {  id=item.child_id}) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>

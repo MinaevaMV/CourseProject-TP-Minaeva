@@ -191,6 +191,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ChildPortfolioController.cs" />
+    <Compile Include="Controllers\FatherController.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelReg.tt</DependentUpon>
     </Compile>
@@ -204,9 +206,11 @@
       <DependentUpon>ModelReg.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ChildController.cs" />
+    <Compile Include="Models\ChildportfolioDAO.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ModelReg.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Family.cs" />
     <Compile Include="Models\ModelReg.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -396,6 +400,8 @@
     <Content Include="Views\Child\IndexMother.cshtml" />
     <Content Include="Views\Child\Index.cshtml" />
     <Content Include="Views\Child\Details.cshtml" />
+    <Content Include="Views\ChildPortfolio\Edit.cshtml" />
+    <Content Include="Views\Father\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
