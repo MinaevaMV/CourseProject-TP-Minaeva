@@ -19,11 +19,17 @@ namespace WebAppV2.Controllers
         // GET: Child/Edit/5
         public ActionResult Edit(int id)
         {
-            father fa = new father();
 
+            father fa = new father();
+            child cha = new child();
             using (kindergartenEntities ctx = new kindergartenEntities())
             {
-                 fa = ctx.father.Where(f => f.father_id == id).FirstOrDefault();
+                cha = ctx.child.Where(ch => ch.child_id == id).FirstOrDefault();
+
+                 fa = ctx.father.Where(f => f.father_id == cha.father_id).FirstOrDefault();
+                ViewData["child"] = cha.child_id;
+                Session["child_id"] = cha.child_id;
+
 
             }
             return View(fa);
@@ -33,18 +39,37 @@ namespace WebAppV2.Controllers
         [HttpPost]
         public ActionResult Edit(father father)
         {
-            father fa = new father();
-        
-
             try
             {
-                FatherDAO.updatefather(fa);
-
-                return RedirectToAction("Index");
+                FatherDAO.updatefather(father);           
+                return View();
             }
             catch
             {
-                return View();
+              return View();
+            }
+        }
+
+        public ActionResult IndexProfile(string username)
+        {
+           
+            father father = new father();
+            using (kindergartenEntities ctx = new kindergartenEntities())
+            {
+                father = (from a in ctx.father where a.father_login == username select a).FirstOrDefault();
+
+            }
+            return View(father);
+        }
+
+        public ActionResult GetChilds(int father_id)
+        {
+            using (kindergartenEntities ctx = new kindergartenEntities())
+            {
+                List<child> mlist = new List<child>();
+                father fa = new father();
+                mlist = ctx.child.Where(cha => cha.father_id == father_id).ToList();
+                return View(mlist);
             }
         }
 

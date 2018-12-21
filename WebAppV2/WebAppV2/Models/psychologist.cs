@@ -24,6 +24,8 @@ namespace WebAppV2.Models
         public int psychologist_experience { get; set; }
         public int psychologist_cabinet { get; set; }
         public string psychologist_phone { get; set; }
+        public string psychologist_login { get; set; }
+        public string psychologist_passport_data { get; set; }
     
         public virtual organization organization { get; set; }
     }

@@ -70,6 +70,8 @@
           <Property Name="methodist_experience" Type="int" Nullable="false" />
           <Property Name="methodist_cabinet" Type="int" Nullable="false" />
           <Property Name="methodist_phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="methodist_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="methodist_login" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="mother">
           <Key>
@@ -110,34 +112,20 @@
           <Property Name="psychologist_experience" Type="int" Nullable="false" />
           <Property Name="psychologist_cabinet" Type="int" Nullable="false" />
           <Property Name="psychologist_phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="psychologist_login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="psychologist_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="report">
           <Key>
             <PropertyRef Name="report_id" />
           </Key>
-          <Property Name="report_id" Type="int" Nullable="false" />
+          <Property Name="report_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="author_id" Type="int" Nullable="false" />
           <Property Name="auditor_id" Type="int" Nullable="false" />
           <Property Name="text" Type="text" Nullable="false" />
           <Property Name="saved" Type="varchar" MaxLength="50" />
           <Property Name="sended" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="schedule">
-          <Key>
-            <PropertyRef Name="schedule_id" />
-          </Key>
-          <Property Name="schedule_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="schedule_group_id" Type="int" Nullable="false" />
-          <Property Name="beginning" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="breakfast" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="morninggames" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="walking" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lunch" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="sleep" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="eveninggames" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="dinner" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="eveningwalking" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ending" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="comment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="superintendent">
           <Key>
@@ -149,6 +137,8 @@
           <Property Name="superintendent_patronymic" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="superintendent_job" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="superintendent_phone" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="superintendent_passport_data" Type="varchar" MaxLength="255" />
+          <Property Name="superintendent_login" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="teacher">
           <Key>
@@ -164,6 +154,8 @@
           <Property Name="teacher_experience" Type="int" Nullable="false" />
           <Property Name="teacher_group_id" Type="int" Nullable="false" />
           <Property Name="teacher_phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teacher_login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="teacher_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="child_father_father_id_fk">
           <End Role="father" Type="Self.father" Multiplicity="0..1" />
@@ -285,18 +277,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="schedule_group_group_id_fk">
-          <End Role="group" Type="Self.group" Multiplicity="1" />
-          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="group">
-              <PropertyRef Name="group_id" />
-            </Principal>
-            <Dependent Role="schedule">
-              <PropertyRef Name="schedule_group_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="teacher_group_group_id_fk">
           <End Role="group" Type="Self.group" Multiplicity="1" />
           <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
@@ -331,7 +311,6 @@
           <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="psychologist" EntityType="Self.psychologist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="superintendent" EntityType="Self.superintendent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="child_father_father_id_fk" Association="Self.child_father_father_id_fk">
@@ -373,10 +352,6 @@
           <AssociationSet Name="report_superintendent_id_superintendent_fk" Association="Self.report_superintendent_id_superintendent_fk">
             <End Role="superintendent" EntitySet="superintendent" />
             <End Role="report" EntitySet="report" />
-          </AssociationSet>
-          <AssociationSet Name="schedule_group_group_id_fk" Association="Self.schedule_group_group_id_fk">
-            <End Role="group" EntitySet="group" />
-            <End Role="schedule" EntitySet="schedule" />
           </AssociationSet>
           <AssociationSet Name="teacher_group_group_id_fk" Association="Self.teacher_group_group_id_fk">
             <End Role="group" EntitySet="group" />
@@ -449,7 +424,6 @@
           <Property Name="group_children_age" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="child" Relationship="Self.child_group_group_id_fk" FromRole="group" ToRole="child" />
           <NavigationProperty Name="organization" Relationship="Self.group_organization_organization_id_fk" FromRole="group" ToRole="organization" />
-          <NavigationProperty Name="schedule" Relationship="Self.schedule_group_group_id_fk" FromRole="group" ToRole="schedule" />
           <NavigationProperty Name="teacher" Relationship="Self.teacher_group_group_id_fk" FromRole="group" ToRole="teacher" />
         </EntityType>
         <EntityType Name="methodist">
@@ -468,6 +442,8 @@
           <Property Name="methodist_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="organization" Relationship="Self.methodist_organization_organization_id_fk" FromRole="methodist" ToRole="organization" />
           <NavigationProperty Name="report" Relationship="Self.report_methodist_methodist_id_fk" FromRole="methodist" ToRole="report" />
+          <Property Name="methodist_passport_data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="methodist_login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="mother">
           <Key>
@@ -515,6 +491,8 @@
           <Property Name="psychologist_cabinet" Type="Int32" Nullable="false" />
           <Property Name="psychologist_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="organization" Relationship="Self.psychologist_organization_organization_id_fk" FromRole="psychologist" ToRole="organization" />
+          <Property Name="psychologist_login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="psychologist_passport_data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="report">
           <Key>
@@ -528,24 +506,7 @@
           <Property Name="sended" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="methodist" Relationship="Self.report_methodist_methodist_id_fk" FromRole="report" ToRole="methodist" />
           <NavigationProperty Name="superintendent" Relationship="Self.report_superintendent_id_superintendent_fk" FromRole="report" ToRole="superintendent" />
-        </EntityType>
-        <EntityType Name="schedule">
-          <Key>
-            <PropertyRef Name="schedule_id" />
-          </Key>
-          <Property Name="schedule_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="schedule_group_id" Type="Int32" Nullable="false" />
-          <Property Name="beginning" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="breakfast" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="morninggames" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="walking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lunch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sleep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="eveninggames" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dinner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="eveningwalking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ending" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="group" Relationship="Self.schedule_group_group_id_fk" FromRole="schedule" ToRole="group" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="superintendent">
           <Key>
@@ -559,6 +520,8 @@
           <Property Name="superintendent_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="organization" Relationship="Self.organization_superintendent_id_superintendent_fk" FromRole="superintendent" ToRole="organization" />
           <NavigationProperty Name="report" Relationship="Self.report_superintendent_id_superintendent_fk" FromRole="superintendent" ToRole="report" />
+          <Property Name="superintendent_passport_data" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="superintendent_login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="teacher">
           <Key>
@@ -576,6 +539,8 @@
           <Property Name="teacher_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="group" Relationship="Self.teacher_group_group_id_fk" FromRole="teacher" ToRole="group" />
           <NavigationProperty Name="organization" Relationship="Self.teacher_organization_organization_id_fk" FromRole="teacher" ToRole="organization" />
+          <Property Name="teacher_login" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="teacher_passport_data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="child_father_father_id_fk">
           <End Role="father" Type="Self.father" Multiplicity="0..1" />
@@ -634,18 +599,6 @@
             </Principal>
             <Dependent Role="group">
               <PropertyRef Name="organization_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="schedule_group_group_id_fk">
-          <End Role="group" Type="Self.group" Multiplicity="1" />
-          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="group">
-              <PropertyRef Name="group_id" />
-            </Principal>
-            <Dependent Role="schedule">
-              <PropertyRef Name="schedule_group_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -743,7 +696,6 @@
           <EntitySet Name="organization" EntityType="Self.organization" />
           <EntitySet Name="psychologist" EntityType="Self.psychologist" />
           <EntitySet Name="report" EntityType="Self.report" />
-          <EntitySet Name="schedule" EntityType="Self.schedule" />
           <EntitySet Name="superintendent" EntityType="Self.superintendent" />
           <EntitySet Name="teacher" EntityType="Self.teacher" />
           <AssociationSet Name="child_father_father_id_fk" Association="Self.child_father_father_id_fk">
@@ -765,10 +717,6 @@
           <AssociationSet Name="group_organization_organization_id_fk" Association="Self.group_organization_organization_id_fk">
             <End Role="organization" EntitySet="organization" />
             <End Role="group" EntitySet="group" />
-          </AssociationSet>
-          <AssociationSet Name="schedule_group_group_id_fk" Association="Self.schedule_group_group_id_fk">
-            <End Role="group" EntitySet="group" />
-            <End Role="schedule" EntitySet="schedule" />
           </AssociationSet>
           <AssociationSet Name="teacher_group_group_id_fk" Association="Self.teacher_group_group_id_fk">
             <End Role="group" EntitySet="group" />
@@ -863,6 +811,8 @@
           <EntitySetMapping Name="methodist">
             <EntityTypeMapping TypeName="kindergartenModel.methodist">
               <MappingFragment StoreEntitySet="methodist">
+                <ScalarProperty Name="methodist_login" ColumnName="methodist_login" />
+                <ScalarProperty Name="methodist_passport_data" ColumnName="methodist_passport_data" />
                 <ScalarProperty Name="methodist_id" ColumnName="methodist_id" />
                 <ScalarProperty Name="organization_id" ColumnName="organization_id" />
                 <ScalarProperty Name="methodist_surname" ColumnName="methodist_surname" />
@@ -906,6 +856,8 @@
           <EntitySetMapping Name="psychologist">
             <EntityTypeMapping TypeName="kindergartenModel.psychologist">
               <MappingFragment StoreEntitySet="psychologist">
+                <ScalarProperty Name="psychologist_passport_data" ColumnName="psychologist_passport_data" />
+                <ScalarProperty Name="psychologist_login" ColumnName="psychologist_login" />
                 <ScalarProperty Name="psychologist_id" ColumnName="psychologist_id" />
                 <ScalarProperty Name="organization_id" ColumnName="organization_id" />
                 <ScalarProperty Name="psychologist_surname" ColumnName="psychologist_surname" />
@@ -922,6 +874,7 @@
           <EntitySetMapping Name="report">
             <EntityTypeMapping TypeName="kindergartenModel.report">
               <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="author_id" ColumnName="author_id" />
                 <ScalarProperty Name="auditor_id" ColumnName="auditor_id" />
@@ -931,27 +884,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="schedule">
-            <EntityTypeMapping TypeName="kindergartenModel.schedule">
-              <MappingFragment StoreEntitySet="schedule">
-                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
-                <ScalarProperty Name="schedule_group_id" ColumnName="schedule_group_id" />
-                <ScalarProperty Name="beginning" ColumnName="beginning" />
-                <ScalarProperty Name="breakfast" ColumnName="breakfast" />
-                <ScalarProperty Name="morninggames" ColumnName="morninggames" />
-                <ScalarProperty Name="walking" ColumnName="walking" />
-                <ScalarProperty Name="lunch" ColumnName="lunch" />
-                <ScalarProperty Name="sleep" ColumnName="sleep" />
-                <ScalarProperty Name="eveninggames" ColumnName="eveninggames" />
-                <ScalarProperty Name="dinner" ColumnName="dinner" />
-                <ScalarProperty Name="eveningwalking" ColumnName="eveningwalking" />
-                <ScalarProperty Name="ending" ColumnName="ending" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="superintendent">
             <EntityTypeMapping TypeName="kindergartenModel.superintendent">
               <MappingFragment StoreEntitySet="superintendent">
+                <ScalarProperty Name="superintendent_login" ColumnName="superintendent_login" />
+                <ScalarProperty Name="superintendent_passport_data" ColumnName="superintendent_passport_data" />
                 <ScalarProperty Name="id_superintendent" ColumnName="id_superintendent" />
                 <ScalarProperty Name="superintendent_surname" ColumnName="superintendent_surname" />
                 <ScalarProperty Name="superintendent_name" ColumnName="superintendent_name" />
@@ -964,6 +901,8 @@
           <EntitySetMapping Name="teacher">
             <EntityTypeMapping TypeName="kindergartenModel.teacher">
               <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="teacher_passport_data" ColumnName="teacher_passport_data" />
+                <ScalarProperty Name="teacher_login" ColumnName="teacher_login" />
                 <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
                 <ScalarProperty Name="organization_id" ColumnName="organization_id" />
                 <ScalarProperty Name="teacher_surname" ColumnName="teacher_surname" />

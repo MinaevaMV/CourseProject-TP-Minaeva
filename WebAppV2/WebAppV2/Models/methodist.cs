@@ -30,7 +30,9 @@ namespace WebAppV2.Models
         public int methodist_experience { get; set; }
         public int methodist_cabinet { get; set; }
         public string methodist_phone { get; set; }
-    
+        public string methodist_passport_data { get; set; }
+        public string methodist_login { get; set; }
+        public string fio { get; set; }
         public virtual organization organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<report> report { get; set; }

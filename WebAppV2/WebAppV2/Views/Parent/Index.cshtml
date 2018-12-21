@@ -1,0 +1,104 @@
+﻿@model WebAppV2.Models.mother
+
+@{
+    ViewBag.Title = "Личный кабинет";
+}
+
+<h2>Личный кабинет</h2>
+
+<div>
+    <h4>@Model.mother_surname @Model.mother_name </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*  @Html.DisplayNameFor(model => model.mother_id)*@
+            <p style="text-align:left"> Мой ID</p>
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_id)
+        </dd>
+    
+        <dt>
+            @* @Html.DisplayNameFor(model => model.mother_surname)*@
+            <p style="text-align:left"> Фамилия</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_surname)
+         
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.mother_name)*@
+            <p style="text-align:left"> Имя</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_name)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.mother_patronymic)*@
+            <p style="text-align:left"> Отчество</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_patronymic)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.mother_passport_data)*@
+            <p style="text-align:left"> Пасспортные данные</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_passport_data)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.mother_Bday)*@
+            <p style="text-align:left"> Дата рождения</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_Bday)
+        </dd>
+        
+        <dt>
+            @*  @Html.DisplayNameFor(model => model.mother_phone)*@
+            <p style="text-align:left"> Телефон</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_phone)
+        </dd>
+
+        <dt>
+            @*  @Html.DisplayNameFor(model => model.mother_education)*@
+            <p style="text-align:left"> Образование</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_education)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.mother_job)*@
+            <p style="text-align:left"> Мессто работы и должность</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mother_job)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Мои дети", "GetChilds", new {  mother_id = Model.mother_id  }) 
+   
+
+</p>

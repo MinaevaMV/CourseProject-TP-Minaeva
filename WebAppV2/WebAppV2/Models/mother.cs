@@ -11,8 +11,7 @@ namespace WebAppV2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class mother
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,7 +25,6 @@ namespace WebAppV2.Models
         public string mother_name { get; set; }
         public string mother_patronymic { get; set; }
         public string mother_passport_data { get; set; }
-        [DataType(DataType.Date)]
         public System.DateTime mother_Bday { get; set; }
         public string mother_phone { get; set; }
         public string mother_education { get; set; }

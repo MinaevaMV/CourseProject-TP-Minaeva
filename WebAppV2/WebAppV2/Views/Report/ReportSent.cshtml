@@ -1,0 +1,33 @@
+﻿@model WebAppV2.Models.report
+
+@{
+    ViewBag.Title = "ReportSent";
+}
+
+<h2>Отправить отчет</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Model.text</h4>
+        <hr />
+ 
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Отправить на проверку" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Продолжить без отправки отчета", "IndexById", new { author_id = Model.author_id })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

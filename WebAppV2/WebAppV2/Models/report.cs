@@ -11,7 +11,8 @@ namespace WebAppV2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class report
     {
         public int report_id { get; set; }
@@ -20,8 +21,15 @@ namespace WebAppV2.Models
         public string text { get; set; }
         public string saved { get; set; }
         public string sended { get; set; }
+        public string comment { get; set; }
+
     
         public virtual methodist methodist { get; set; }
         public virtual superintendent superintendent { get; set; }
+
+        [NotMapped]
+        public List<methodist> metlist = new List<methodist>();
+        public List<superintendent> suplist = new List<superintendent>();
+
     }
 }

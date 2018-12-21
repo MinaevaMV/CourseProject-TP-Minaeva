@@ -34,7 +34,6 @@ namespace WebAppV2.Models
         public virtual DbSet<organization> organization { get; set; }
         public virtual DbSet<psychologist> psychologist { get; set; }
         public virtual DbSet<report> report { get; set; }
-        public virtual DbSet<schedule> schedule { get; set; }
         public virtual DbSet<superintendent> superintendent { get; set; }
         public virtual DbSet<teacher> teacher { get; set; }
     }

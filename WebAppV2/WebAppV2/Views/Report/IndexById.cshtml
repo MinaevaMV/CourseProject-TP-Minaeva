@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebAppV2.Models.report>
+
+@{
+    ViewBag.Title = "IndexById";
+}
+
+<h2>Отчетные материалы</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый", "Create")
+</p>
+<p> Документы можно посмотреть <a href="https://drive.google.com/drive/folders/1z0qzRd47n0_3yk-rg4CGwabup4Q8TWBJ"> здесь</a></p>
+<table class="table">
+    <tr>
+        <th>
+            Номер отчета
+        </th>
+        <th>
+            Проверяющий
+
+        </th>
+        <th>
+            Тема 
+
+        </th>
+        <th>
+           Статус проверки
+        </th>
+        <th>
+            Комментарии проверяющего
+        </th>
+        <th>
+            Статус отправки
+           
+        </th>
+        <th></th>
+    </tr>
+     @{int i = 0;
+foreach (var item in Model)
+{
+
+    var superintendent = (ViewData["superintendentFIO"] as List<WebAppV2.Models.superintendent>).ElementAt(i);
+    string FIO = superintendent.fio;
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.report_id)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => FIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.saved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sended)
+        </td>
+
+        <td>
+            @Html.ActionLink("Отправить на проверку", "ReportSent", new { id = item.report_id })
+        </td>
+    </tr>
+}
+         i++;
+         }
+
+</table>

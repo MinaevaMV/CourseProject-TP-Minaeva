@@ -46,7 +46,7 @@ namespace WebAppV2.Models
         {
             using (var ctx = new kindergartenEntities())
             {
-                string query = "update father set father_login = @p1 where father_passport_data = @p2";
+                string query = "update father set father_login = @p0 where [father_passport_data] = @p1";
                 List<object> paramlist = new List<object>
                 {
 
@@ -70,21 +70,21 @@ namespace WebAppV2.Models
 
             using (var ctx = new kindergartenEntities())
             {
-                father fa = ctx.father.Where(f => f.father_id == father.father_id).FirstOrDefault();
+               // father fa = ctx.father.Where(f => f.father_id == father.father_id).FirstOrDefault();
 
-                string upquery = "update father set father_surname = @P0, father_name= @P1, father_patronymic= @P2, father_passport_data= @P3, father_Bday= @P4, father_phone= @P5, father_education= @P6, father_job= @P7";
+                string upquery = "update father set father_surname = @P0, father_name= @P1, father_patronymic= @P2, father_passport_data= @P3, father_Bday= @P4, father_phone= @P5, father_education= @P6, father_job= @P7 where father_id = @P8";
                 List<object> paramlist = new List<object>
                 {
 
-                fa.father_surname,
-                fa.father_name,
-                fa.father_patronymic,
-                fa.father_passport_data,
-                fa.father_Bday,
-                fa.father_phone,
-                fa.father_education,
-                fa.father_job,
-
+                father.father_surname,
+                father.father_name,
+                father.father_patronymic,
+                father.father_passport_data,
+                father.father_Bday,
+                father.father_phone,
+                father.father_education,
+                father.father_job,
+                father.father_id,
                 };
                 object[] parameters = paramlist.ToArray();
                 int result = ctx.Database.ExecuteSqlCommand(upquery, parameters);

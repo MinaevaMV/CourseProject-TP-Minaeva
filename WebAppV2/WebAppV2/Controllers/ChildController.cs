@@ -13,6 +13,7 @@ namespace WebApp.Controllers
     {
         private readonly ChildDAO _dao = new ChildDAO();
         // GET: Child
+        [HttpGet]
         public ActionResult Index()
         {
             using (kindergartenEntities ctx = new kindergartenEntities())
@@ -32,6 +33,17 @@ namespace WebApp.Controllers
                 {
                     el.fio = el.father_surname + " " + el.father_name + " " + el.father_patronymic;
                 }
+                List<group> glist = ctx.group.ToList();
+                ViewData["group_id"] = new List<SelectListItem>();
+                foreach(group el in glist)
+                {
+                    SelectListItem item = new SelectListItem()
+                    {
+                        Text = el.group_profile + ". Birth year:" + el.group_children_age,
+                        Value = el.group_id.ToString()
+                    };
+                    (ViewData["group_id"] as List<SelectListItem>).Add(item);
+                }
                 ViewData["motherFIO"] = mlist;
                 ViewData["fatherFIO"] = flist;
                 List<child> list_child = ChildDAO.GetChild();
@@ -39,6 +51,49 @@ namespace WebApp.Controllers
                 return View(list_child);
             }
         }
+
+        [HttpPost]
+        public ActionResult Index(child ch)
+        {
+            using (kindergartenEntities ctx = new kindergartenEntities())
+            {
+                child child_model = new child();
+                child_model.momnameslist = ctx.mother.ToList<mother>();
+                mother mother_model = new mother();
+                string query = "select m.* from mother m inner join child c on c.mother_id=m.mother_id";
+                List<mother> mlist = ctx.Database.SqlQuery<mother>(query).ToList();
+                foreach (mother el in mlist)
+                {
+                    el.fio = el.mother_name + " " + el.mother_surname + " " + el.mother_patronymic;
+                }
+                string fquery = "select f.* from father f inner join child c on c.father_id=f.father_id";
+                List<father> flist = ctx.Database.SqlQuery<father>(fquery).ToList();
+                foreach (father el in flist)
+                {
+                    el.fio = el.father_surname + " " + el.father_name + " " + el.father_patronymic;
+                }
+                List<group> glist = ctx.group.ToList();
+                ViewData["group_id"] = new List<SelectListItem>();
+                foreach (group el in glist)
+                {
+                    SelectListItem item = new SelectListItem()
+                    {
+                        Text = el.group_profile + ". Birth year:" + el.group_children_age,
+                        Value = el.group_id.ToString()
+                    };
+                    (ViewData["group_id"] as List<SelectListItem>).Add(item);
+                }
+                ViewData["motherFIO"] = mlist;
+                ViewData["fatherFIO"] = flist;
+                List<child> list_child = ChildDAO.GetChild();
+                list_child = list_child.Where(c => c.group_id == ch.group_id).ToList();
+
+                return View(list_child);
+            }
+        }
+        
+
+
 
 
         // GET: Child/Details/5
@@ -62,6 +117,7 @@ namespace WebApp.Controllers
                 ViewData["father"] = flist;
                 ViewData["group"] = glist;
                 ViewData["family"] = fam;
+                Session["child_id"] = id;
                
             }
 
@@ -85,15 +141,15 @@ namespace WebApp.Controllers
 
                 foreach (mother el in child_model.momnameslist)
                 {
-                    el.fio = el.mother_surname + " " + el.mother_name + " " + el.mother_patronymic;
+                    el.fio = el.mother_surname + " " + el.mother_name + " " + el.mother_patronymic + " (" + el.mother_passport_data + ")";
                 }
                 foreach (father el in child_model.dadnameslist)
                 {
-                    el.fio = el.father_surname + " " + el.father_name + " " + el.father_patronymic;
+                    el.fio = el.father_surname + " " + el.father_name + " " + el.father_patronymic + " (" + el.father_passport_data + ")";
                 }
                 foreach (group el in child_model.groupslist)
                 {
-                    el.name = el.group_children_age + " " + el.group_profile;
+                    el.name = el.group_profile + ". Birth year: " + el.group_children_age;
                 }
 
             }

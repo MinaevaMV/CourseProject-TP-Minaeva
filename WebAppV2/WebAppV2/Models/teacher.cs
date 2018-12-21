@@ -24,6 +24,8 @@ namespace WebAppV2.Models
         public int teacher_experience { get; set; }
         public int teacher_group_id { get; set; }
         public string teacher_phone { get; set; }
+        public string teacher_login { get; set; }
+        public string teacher_passport_data { get; set; }
     
         public virtual group group { get; set; }
         public virtual organization organization { get; set; }

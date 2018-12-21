@@ -65,6 +65,8 @@
     <Property Name="methodist_experience" Type="int" Nullable="false" />
     <Property Name="methodist_cabinet" Type="int" Nullable="false" />
     <Property Name="methodist_phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="methodist_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="methodist_login" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="mother">
     <Key>
@@ -105,34 +107,20 @@
     <Property Name="psychologist_experience" Type="int" Nullable="false" />
     <Property Name="psychologist_cabinet" Type="int" Nullable="false" />
     <Property Name="psychologist_phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="psychologist_login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="psychologist_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="report">
     <Key>
       <PropertyRef Name="report_id" />
     </Key>
-    <Property Name="report_id" Type="int" Nullable="false" />
+    <Property Name="report_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="author_id" Type="int" Nullable="false" />
     <Property Name="auditor_id" Type="int" Nullable="false" />
     <Property Name="text" Type="text" Nullable="false" />
     <Property Name="saved" Type="varchar" MaxLength="50" />
     <Property Name="sended" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="schedule">
-    <Key>
-      <PropertyRef Name="schedule_id" />
-    </Key>
-    <Property Name="schedule_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="schedule_group_id" Type="int" Nullable="false" />
-    <Property Name="beginning" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="breakfast" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="morninggames" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="walking" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="lunch" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="sleep" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="eveninggames" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="dinner" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="eveningwalking" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ending" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="comment" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="superintendent">
     <Key>
@@ -144,6 +132,8 @@
     <Property Name="superintendent_patronymic" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="superintendent_job" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="superintendent_phone" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="superintendent_passport_data" Type="varchar" MaxLength="255" />
+    <Property Name="superintendent_login" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="teacher">
     <Key>
@@ -159,6 +149,8 @@
     <Property Name="teacher_experience" Type="int" Nullable="false" />
     <Property Name="teacher_group_id" Type="int" Nullable="false" />
     <Property Name="teacher_phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="teacher_login" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="teacher_passport_data" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="child_father_father_id_fk">
     <End Role="father" Type="Self.father" Multiplicity="0..1" />
@@ -280,18 +272,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="schedule_group_group_id_fk">
-    <End Role="group" Type="Self.group" Multiplicity="1" />
-    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="group">
-        <PropertyRef Name="group_id" />
-      </Principal>
-      <Dependent Role="schedule">
-        <PropertyRef Name="schedule_group_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="teacher_group_group_id_fk">
     <End Role="group" Type="Self.group" Multiplicity="1" />
     <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
@@ -326,7 +306,6 @@
     <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="psychologist" EntityType="Self.psychologist" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="superintendent" EntityType="Self.superintendent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="child_father_father_id_fk" Association="Self.child_father_father_id_fk">
@@ -368,10 +347,6 @@
     <AssociationSet Name="report_superintendent_id_superintendent_fk" Association="Self.report_superintendent_id_superintendent_fk">
       <End Role="superintendent" EntitySet="superintendent" />
       <End Role="report" EntitySet="report" />
-    </AssociationSet>
-    <AssociationSet Name="schedule_group_group_id_fk" Association="Self.schedule_group_group_id_fk">
-      <End Role="group" EntitySet="group" />
-      <End Role="schedule" EntitySet="schedule" />
     </AssociationSet>
     <AssociationSet Name="teacher_group_group_id_fk" Association="Self.teacher_group_group_id_fk">
       <End Role="group" EntitySet="group" />

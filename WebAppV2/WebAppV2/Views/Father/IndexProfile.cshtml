@@ -1,0 +1,118 @@
+﻿@model WebAppV2.Models.father
+
+@{
+    ViewBag.Title = "IndexProfile";
+}
+
+<h2>IndexProfile</h2>
+
+<div>
+    <h4>father</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div style="float: left; text-align:left">
+            <dt>
+                @* @Html.DisplayNameFor(model => model.father_id)*@
+                ID отца
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_id)
+                <p>ID отца</p>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_surname)
+
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_surname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_patronymic)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_patronymic)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_passport_data)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_passport_data)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_Bday)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_Bday)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_education)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_education)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_job)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_job)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_login)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_login)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.father_password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.father_password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fio)
+            </dd>
+            </div>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Childs", "GetChilds", new { father_id = Model.father_id }) ||
+    @Html.ActionLink("Back to List", "Index")
+</p>

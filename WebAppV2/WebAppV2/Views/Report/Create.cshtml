@@ -1,0 +1,68 @@
+﻿@model WebAppV2.Models.report
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Добавить отчет</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+      @*  @Html.LabelFor(model => model.author_id, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <b class="control-label col-md-2"> Автор </b>
+        <div class="col-md-10">
+            @*   @Html.EditorFor(model => model.author_id, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownListFor(model => model.author_id, new SelectList(Model.metlist, "methodist_id", "fio"), "Выбрать", new { style = "width: 300px;", @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.author_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+      @*  @Html.LabelFor(model => model.auditor_id, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <b class="control-label col-md-2">Проверяющий</b>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.auditor_id, new SelectList(Model.suplist, "id_superintendent", "fio"), "Выбрать", new { style = "width: 300px;", @class = "form-control" })
+
+            @*  @Html.EditorFor(model => model.auditor_id, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.auditor_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*    @Html.LabelFor(model => model.text, htmlAttributes: new { @class = "control-label col-md-2" })*@
+          <b class="control-label col-md-2">Тема и название текстового документа на Google диске</b>
+    
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.text, 5, 50, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.text, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p> Текстовый документ отчета прикрепите <a href="https://drive.google.com/drive/folders/1z0qzRd47n0_3yk-rg4CGwabup4Q8TWBJ"> сюда</a></p>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Добавить" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "IndexByUser", new { username = User.Identity.Name})
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

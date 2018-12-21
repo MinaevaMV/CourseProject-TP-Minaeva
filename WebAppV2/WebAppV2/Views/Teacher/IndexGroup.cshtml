@@ -1,0 +1,88 @@
+﻿@model WebAppV2.Models.group
+
+@{
+    ViewBag.Title = "IndexGroup";
+}
+
+<h2>Моя группа</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*   @Html.DisplayNameFor(model => model.group_id)*@
+            <p style="text-align:left"> ID группы</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_id)
+        </dd>
+
+
+
+        <dt>
+            @*   @Html.DisplayNameFor(model => model.group_cabinet)*@
+            <p style="text-align:left"> Номер кабинета</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_cabinet)
+        </dd>
+
+        <dt>
+            @* @Html.DisplayNameFor(model => model.group_profile)*@
+            <p style="text-align:left"> Профиль группы</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_profile)
+        </dd>
+
+        <dt>
+            @*  @Html.DisplayNameFor(model => model.group_area)*@
+            <p style="text-align:left"> Площадь</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_area)
+        </dd>
+
+        <dt>
+            @*  @Html.DisplayNameFor(model => model.group_children_age)*@
+            <p style="text-align:left"> Год рождения воспитанников</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_children_age)
+        </dd>
+
+
+    </dl>
+    @*@using (Html.BeginForm("Index", "Child", FormMethod.Post, htmlAttributes: new { @onsubmit = Model.group_id }))
+        {
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Выбрать" class="btn btn-default " style="display: inline; float: right"
+                          />
+
+                </div>
+            </div>
+        }*@
+</div>
+@using (Html.BeginForm("Index", "Child",  new { group_id = Model.group_id }, FormMethod.Post))
+{
+  
+            <input type="submit" value="Мои воспитанники" class="btn btn-default " style="display: inline; float: left"
+                   />
+
+     
+}
+<p>
+
+
+    @*@Html.ActionLink("Index", "Index", "Child", FormMethod.Post, new { ch = Model.group_id }) |
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

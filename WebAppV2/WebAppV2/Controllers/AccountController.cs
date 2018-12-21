@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -23,7 +24,7 @@ namespace WebAppV2.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +36,9 @@ namespace WebAppV2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -121,7 +122,7 @@ namespace WebAppV2.Controllers
             // Если пользователь введет неправильные коды за указанное время, его учетная запись 
             // будет заблокирована на заданный период. 
             // Параметры блокирования учетных записей можно настроить в IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -154,17 +155,22 @@ namespace WebAppV2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                //Roles.AddUserToRole(model.Email, "User");
+
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
+                    //  await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: false);
+                     await SignInManager.PasswordSignInAsync(model.Email, model.Password, false , shouldLockout: false);
                     // Дополнительные сведения о включении подтверждения учетной записи и сброса пароля см. на странице https://go.microsoft.com/fwlink/?LinkID=320771.
                     // Отправка сообщения электронной почты с этой ссылкой
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-                  //  ViewBag["login"] = model.Email;
+                    //  ViewBag["login"] = model.Email;
                     Session["login"] = model.Email;
+                    Session["UserID"] = user.Id;
+                   // var res = await UserManager.AddToRoleAsync(user.Id, "User");
                     return RedirectToAction("RegisterStep2", "Account");
 
                     //user.login = 
@@ -179,29 +185,156 @@ namespace WebAppV2.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterStep2(mother user)
+        public async Task<ActionResult> RegisterStep2(mother user)
         {
-            if ((string)Session["gender"]=="male")
+            if (Request["gender"]=="male")
+            //if ((string)Session["male"] == "male")
             {
-              //  FatherDAO fdao = new FatherDAO();
+                
+                //  FatherDAO fdao = new FatherDAO();
                 father father = new father();
                 father.father_id = user.mother_id;
                 father.father_passport_data = user.mother_passport_data;
+
+                father.father_login = Session["login"] as string;
+                string id = Session["UserId"] as string;
                 if (FatherDAO.UpdateLogin(father))
                 {
                     Session["user"] = user;
+                    // var res = await UserManager.RemoveFromRoleAsync(Session["UserId"] as string, "User");
+                    var result = await UserManager.AddToRoleAsync(id, "Parent");
+                 
+                }
+                else
+                {
+                    ViewData["error"] = "Ваших пасспортных данных нет в базе";
+                    return View();
+                }
+                Session["gender"] = null;
+                return RedirectToAction("Login", "Account");
+               
+            }
+            if (Request["gender"] == "female")
+            {
+                mother mother = new mother();
+                mother.mother_id = user.mother_id;
+                mother.mother_passport_data = user.mother_passport_data;
+                mother.mother_login = Session["login"] as string;
+                string id = Session["UserId"] as string;
+                if (MotherDAO.UpdateLogin(mother))
+                {
+                    Session["user"] = user;
+                    var result = await UserManager.AddToRoleAsync(id, "Mother");
+                   
+                }
+                else
+                {
+                    ViewData["error"] = "Ваших пасспортных данных нет в базе";
+                    return View();
+                }
+                Session["gender"] = null;
+                return RedirectToAction("Login", "Account"); ;
+            }
+            if (Request["gender"] == "methodist")
+
+            {
+                methodist methodist = new methodist();
+                methodist.methodist_id = user.mother_id;
+                methodist.methodist_passport_data = user.mother_passport_data;
+                string id = Session["UserId"] as string;
+                methodist.methodist_login = Session["login"] as string;
+                if (MethodistDAO.UpdateLogin(methodist))
+                {
+                    Session["user"] = user;
+                    var result = await UserManager.AddToRoleAsync(id, "Methodist");
+                  
+                }
+                else
+                {
+                    ViewData["error"] = "Ваших пасспортных данных нет в базе";
+                    return View();
+                }
+                Session["methodist"] = null;
+                return RedirectToAction("Login", "Account");
+
+
+            }
+            if (Request["gender"] == "teacher")
+
+            {
+
+                teacher teacher = new teacher();
+                teacher.teacher_id = user.mother_id;
+                teacher.teacher_passport_data = user.mother_passport_data;
+                teacher.teacher_login = Session["login"] as string;
+                string id = Session["UserId"] as string;
+                if (TeacherDAO.UpdateLogin(teacher))
+                {
+                    Session["user"] = user;
+                    var result = await UserManager.AddToRoleAsync(id, "Teacher");
 
                 }
                 else
                 {
-                    ViewData["error"] = "write correct passport data or tikaite s sela";
+                    ViewData["error"] = "Ваших пасспортных данных нет в базе";
                     return View();
                 }
-                return  RedirectToAction("Index", "Home"); ;
+                Session["methodist"] = null;
+                return RedirectToAction("Login", "Account");
+
+
             }
+            if (Request["gender"] == "psychologist")
+
+            {
+                psychologist psychologist = new psychologist();
+                psychologist.psychologist_id = user.mother_id;
+                psychologist.psychologist_passport_data = user.mother_passport_data;
+                string id = Session["UserId"] as string;
+                if (PsychologistDAO.SearchPassport(psychologist))
+                {
+                    Session["user"] = user;
+                    var result = await UserManager.AddToRoleAsync(id, "Psychologist");
+
+                }
+                else
+                {
+                    ViewData["error"] = "Ваших пасспортных данных нет в базе";
+                    return View();
+                }
+                Session["methodist"] = null;
+                return RedirectToAction("Login", "Account");
+            }
+                if (Request["gender"] == "superintendent")
+
+                {
+                superintendent sup = new superintendent();
+                sup.id_superintendent = user.mother_id;
+                sup.superintendent_passport_data = user.mother_passport_data;
+                    string id = Session["UserId"] as string;
+                    sup.superintendent_login = Session["login"] as string;
+                    if (SuperintendentDAO.UpdateLogin(sup))
+                    {
+                        Session["user"] = user;
+                        var result = await UserManager.AddToRoleAsync(id, "Superintendent");
+
+                    }
+                    else
+                    {
+                        ViewData["error"] = "Ваших пасспортных данных нет в базе";
+                        return View();
+                    }
+                    Session["methodist"] = null;
+                    return RedirectToAction("Login", "Account");
+
+
+                }
+
+            
+
+
+
             else return null;
-
-
         }
 
         [HttpGet]

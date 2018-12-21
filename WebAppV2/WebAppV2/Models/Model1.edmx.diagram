@@ -4,25 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c1576982e244fb6912bbc47b4efdb1e" Name="Diagram1">
-        <EntityTypeShape EntityType="kindergartenModel.child" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.child_portfolio" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.father" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.group" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.methodist" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.mother" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.organization" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.psychologist" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.report" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.schedule" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.superintendent" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="kindergartenModel.teacher" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+      <Diagram DiagramId="2c1576982e244fb6912bbc47b4efdb1e" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="kindergartenModel.child" Width="1.5" PointX="14.125" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.child_portfolio" Width="1.5" PointX="17.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.father" Width="1.5" PointX="14.625" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.group" Width="1.5" PointX="4.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.methodist" Width="1.5" PointX="9.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.mother" Width="1.5" PointX="11.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.organization" Width="1.5" PointX="7.125" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.psychologist" Width="1.5" PointX="11.875" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.report" Width="1.5" PointX="5.875" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.superintendent" Width="1.5" PointX="2.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.teacher" Width="1.5" PointX="9.625" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="kindergartenModel.child_father_father_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.child_group_group_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.child_mother_mother_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.child_portfolio_child_child_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.group_organization_organization_id_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="kindergartenModel.schedule_group_group_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.teacher_group_group_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.methodist_organization_organization_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.report_methodist_methodist_id_fk" ManuallyRouted="false" />

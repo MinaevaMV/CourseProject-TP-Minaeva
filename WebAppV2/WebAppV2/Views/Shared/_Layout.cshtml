@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
@@ -18,15 +18,56 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Детский сад", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Add child", "Create", "Child")</li>
-                    <li>@Html.ActionLink("Get childs", "Index", "Child")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+
+                    @if (User.IsInRole("Methodist"))
+                    {
+
+                        <li>
+                            @Html.ActionLink("Отчетные материалы", "IndexByUser", "Report", new { username = User.Identity.Name }, new { @style = "font-size:14px" }) )
+                        </li>
+                        <li> @Html.ActionLink("Добавить ребенка", "Create", "Child") </li>
+                        <li> @Html.ActionLink("Воспитанники ДОУ", "Index", "Child") </li>
+                    }
+
+                    @if (User.IsInRole("Superintendent"))
+                    {
+                        <li>
+                            @Html.ActionLink("Отчетные материалы", "IndexBySupUser", "Report", new { username = User.Identity.Name }, new { @style = "font-size:14px" }) )
+                        </li>
+                    }
+
+
+
+
+                    @if (User.IsInRole("Psychologist"))
+                    {
+                        <li> @Html.ActionLink("Воспитанники ДОУ", "Index", "Child") </li>
+                    }
+
+                    @if (User.IsInRole("Parent"))
+                    {
+
+                        <li>
+                            @Html.ActionLink("Личный кабинет", "IndexProfile", "Father",
+             new { username = User.Identity.Name }, new { @style = "font-size:18px" })) )
+                        </li>
+
+                    }
+                    @if (User.IsInRole("Mother"))
+                    {
+
+                        <li> @Html.ActionLink("Личный кабинет", "Index", "Parent", new { username = User.Identity.Name }, new { @style = "font-size:18px" }) ) </li>
+                    }
+
+                    @if (User.IsInRole("Teacher"))
+                    {
+
+                        <li> @Html.ActionLink("Моя группа", "IndexGroup", "Teacher", new { username = User.Identity.Name }, new { @style = "font-size:18px" }) ) </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,17 +75,17 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr/>
-        <footer>
-            <p>&copy;  @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
+        <hr />
+        @*<footer>
+                <p>&copy;  @DateTime.Now.Year – приложение ASP.NET</p>
+            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
- 
+
 
 </body>
 </html>

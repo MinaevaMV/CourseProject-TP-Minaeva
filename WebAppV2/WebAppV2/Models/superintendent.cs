@@ -27,7 +27,10 @@ namespace WebAppV2.Models
         public string superintendent_patronymic { get; set; }
         public string superintendent_job { get; set; }
         public string superintendent_phone { get; set; }
-    
+        public string superintendent_passport_data { get; set; }
+        public string superintendent_login { get; set; }
+        public string fio { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<organization> organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -193,6 +193,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ChildPortfolioController.cs" />
     <Compile Include="Controllers\FatherController.cs" />
+    <Compile Include="Controllers\MethodistController.cs" />
+    <Compile Include="Controllers\MotherController.cs" />
+    <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelReg.tt</DependentUpon>
     </Compile>
@@ -211,6 +216,7 @@
       <DependentUpon>ModelReg.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Family.cs" />
+    <Compile Include="Models\MethodistDAO.cs" />
     <Compile Include="Models\ModelReg.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -274,14 +280,16 @@
     <Compile Include="Models\organization.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PsychologistDAO.cs" />
+    <Compile Include="Models\ReportDAO.cs" />
+    <Compile Include="Models\SuperintendentDAO.cs" />
+    <Compile Include="Models\TeacherDAO.cs" />
+    <Compile Include="Models\WorkerDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\psychologist.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\report.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\schedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -402,9 +410,25 @@
     <Content Include="Views\Child\Details.cshtml" />
     <Content Include="Views\ChildPortfolio\Edit.cshtml" />
     <Content Include="Views\Father\Edit.cshtml" />
+    <Content Include="Views\Mother\Edit.cshtml" />
+    <Content Include="Views\Parent\Index.cshtml" />
+    <Content Include="Views\Parent\GetChilds.cshtml" />
+    <Content Include="Views\Father\IndexProfile.cshtml" />
+    <Content Include="Views\Father\GetChilds.cshtml" />
+    <Content Include="Views\Teacher\IndexGroup.cshtml" />
+    <Content Include="Views\Child\GetByGroup.cshtml" />
+    <Content Include="Views\Report\Create.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\ReportSent.cshtml" />
+    <Content Include="Views\Report\IndexById.cshtml" />
+    <Content Include="Views\Report\IndexByUser.cshtml" />
+    <Content Include="Views\Report\IndexBySupUser.cshtml" />
+    <Content Include="Views\Report\ReportComment.cshtml" />
+    <Content Include="Views\Report\ReportCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Methodist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

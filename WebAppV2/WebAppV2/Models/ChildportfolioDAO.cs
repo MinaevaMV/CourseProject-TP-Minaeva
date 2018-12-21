@@ -22,14 +22,7 @@ namespace WebAppV2.Models
             cp.child_id = child.child_id;
             using (var ctx = new kindergartenEntities())
             {
-                //   // string query = "insert into child_portfolio (child_id) values (@P0)";
-                //  //  List<object> paramlist = new List<object>
-                //{
-                //    cp.child_id,
-
-                //};
-                //    object[] parameters = paramlist.ToArray();
-                //    int result = ctx.Database.ExecuteSqlCommand(query, parameters);
+             
                 ctx.child_portfolio.Add(cp);
                 ctx.SaveChanges();
 

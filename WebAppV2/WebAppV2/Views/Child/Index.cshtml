@@ -4,45 +4,105 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Воспитанники ДОУ</h2>
+<script>
+    function GetGroup() {
+        var a = document.getElementById("Groups").value;
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        @Session["Group_id"] = a;
+    }
+</script>
+
+@if (User.IsInRole("Methodist"))
+{
+    <p>
+        @Html.ActionLink("Добавить воспитанника", "Create")
+
+        @using (Html.BeginForm("Index", "Child", FormMethod.Post,
+            htmlAttributes: new { @onsubmit = "GetGroup()" }))
+        {
+            @Html.DropDownList("group_id", null, new { @class = "form-control", @style = "display: inline; float: right" })
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Выбрать" class="btn btn-default " style="display: inline; float: right"
+                           onclick="GetGroup()" />
+
+                </div>
+            </div>
+        }
+    </p>
+}
+
+@if (User.IsInRole("Psychologist"))
+{
+    <p>
+
+
+        @using (Html.BeginForm("Index", "Child", FormMethod.Post,
+            htmlAttributes: new { @onsubmit = "GetGroup()" }))
+        {
+            @Html.DropDownList("group_id", null, new { @class = "form-control", @style = "display: inline; float: right" })
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Выбрать" class="btn btn-default " style="display: inline; float: right"
+                           onclick="GetGroup()" />
+
+                </div>
+            </div>
+        }
+    </p>
+}
+<br />
+<br />
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.child_id)
+            ID ребенка
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.child_surname)
+            Фамилия
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.child_name)
+            Имя
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.child_patronymic)
+            Отчество
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Bday)
+            Дата рождения
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gender)
+            Гендер
+
+        </th>
+        @*<th>
+                ID матери
+
+            </th>*@
+        <th>
+            Мать
+
+        </th>
+        @*<th>
+                ID отца
+
+            </th>*@
+        <th>
+            Отец
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.mother_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mother_fio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.father_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.father_fio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.group_id)
+            ID группы
+
         </th>
         <th></th>
     </tr>
@@ -56,47 +116,62 @@
             string FIO = mother.fio;
             string fFIO = father.fio;
 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.child_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.child_surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.child_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.child_patronymic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mother_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => FIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.father_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => fFIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.group_id)
-        </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.child_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.child_surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.child_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.child_patronymic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.mother_id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => FIO)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.father_id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => fFIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.group_id)
+                </td>
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", "ChildPortfolio",new { id=item.child_id }, new { htmlAttributes = new { @class = "" } }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.child_id}) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+                <td>
+
+                    @if (User.IsInRole("Psychologist"))
+                    {
+                        @Html.ActionLink("Портфолио", "Edit", "ChildPortfolio", new { id = item.child_id }, new { htmlAttributes = new { @class = "" } })
+                    }
+
+                    @if (User.IsInRole("Parent"))
+                    {
+                        @Html.ActionLink("Портфолио", "Edit", "ChildPortfolio", new { id = item.child_id }, new { htmlAttributes = new { @class = "" } })
+                    }
+
+                    @if (User.IsInRole("Mother"))
+                    {
+                        @Html.ActionLink("Портфолио", "Edit", "ChildPortfolio", new { id = item.child_id }, new { htmlAttributes = new { @class = "" } })
+                    }
+
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.child_id })
+                    @*  @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
             i++;
         }
 
